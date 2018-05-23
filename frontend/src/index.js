@@ -4,6 +4,7 @@ import { Provider } from 'redux'
 import { createStore } from 'react-redux'
 import { BrowserRouter as Router } from 'react-router-dom'
 
+// IMPORT STORE
 import App from './App'
 import registerServiceWorker from './registerServiceWorker'
 
