@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Switch, Route } from 'react-router-dom'
+import { Switch, Route, Link } from 'react-router-dom'
 
 import './styles/theme.css'
 import Landing from './components/Landing'
@@ -10,7 +10,9 @@ class App extends Component {
     console.log(this.props)
     return (
       <div className="App">
-        <h1>thunder.</h1>
+        <Link to="/">
+          <h1>thunder.</h1>
+        </Link>
         <Switch>
           <Route exact path="/" render={() => {
             return <Landing />

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { withRouter } from 'react-router-dom'
+import { withRouter, Link } from 'react-router-dom'
 import axios from 'axios'
 
 import { Form, Icon, Input, Button, Checkbox } from 'antd'
@@ -46,7 +46,9 @@ class Landing extends Component {
           })(
             <Checkbox>Remember me</Checkbox>
           )}
-          <a className="login-form-forgot" href="">Forgot password</a>
+          <Link to="/signup">
+            <p className="login-form-forgot">Sign up</p>
+          </Link>
           <Button type="primary" htmlType="submit" className="login-form-button">
             Log in
           </Button>

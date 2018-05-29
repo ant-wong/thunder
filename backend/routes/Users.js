@@ -1,6 +1,7 @@
 const express = require('express')
       router = express.Router()
       fs = require('fs')
+      knex = require('../knex')
       
 const bcrypt = require('bcrypt')
 
@@ -8,27 +9,51 @@ let testHash
 
 // GET ALL USERS
 router.get('/artists', (req, res) => {
-  res.send('all them users')
+  knex.select()
+    .from('users')
+    .then((users) => {
+      res.send(users)
+    })
 })
 
 // GET SINGLE USER
 router.get('/artists/:id', (req, res) => {
-  res.send('single user')
+  knex.select()
+    .from('users')
+    .where('id', req.params.id)
+    .then((user) => {
+      res.send(user)
+    })
 })
 
 // CREATE NEW USER
 router.post('/artists', (req, res) => {
-  console.log(req.body, 'added user booooiii')
+  const { email, username, password, title, genre } = req.body.values
+
   bcrypt.genSalt(10, (err, salt) => {
-    bcrypt.hash(req.body.values.password, salt, (err, hash) => {
+    bcrypt.hash(password, salt, (err, hash) => {
       // Store hash in your password DB.
-      console.log(hash)
-      testHash = hash
+      knex('users')
+        .insert({
+          email: email,
+          hashed_password: hash,
+          username: username,
+          title: title,
+          genre: genre
+        })
+        .then(() => {
+          knex.select()
+            .from('users')
+            .then((users) => {
+              console.log(users)
+            })
+        })
       if (err) throw err
     })
   })
 })
 
+// LOG IN
 router.post('/login', (req, res) => {
   console.log(req.body)
   bcrypt.compare(req.body.values.password, testHash, function (err, res) {
@@ -41,8 +66,19 @@ router.post('/login', (req, res) => {
 })
 
 // UPDATE USER INFO
-router.put('/artists', (req, res) => {
-
+router.put('/artists/:id', (req, res) => {
+  knex('users').where('id', req.params.id)
+    .update({
+      title: req.body.title,
+      genre: req.body.genre
+    })
+    .then(() => {
+      knex.selet()
+        .from('users')
+        .then((users) => {
+          console.log(users)
+        })
+    })
 })
 
 // DELETE USER

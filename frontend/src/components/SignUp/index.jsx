@@ -60,8 +60,25 @@ class SignUp extends Component  {
           label="E-mail">
           {getFieldDecorator('email', {
             rules: [
-              { type: 'email', message: 'Th' }, 
-              { required: true, message: 'Pleas input and e-mail.' }
+              { type: 'email', message: 'This is not a vlid e-mail.' }, 
+              { required: true, message: 'Please input and e-mail.' }
+            ],
+          })(
+            <Input />
+          )}
+        </FormItem>
+        <FormItem
+          label={(
+            <span>
+              Username&nbsp;
+              <Tooltip title="What do you want others to call you?">
+                <Icon type="question-circle-o" />
+              </Tooltip>
+            </span>
+          )}>
+          {getFieldDecorator('username', {
+            rules: [
+              { required: true, message: 'Please input your nickname!', whitespace: true }
             ],
           })(
             <Input />
@@ -92,15 +109,32 @@ class SignUp extends Component  {
         <FormItem
           label={(
             <span>
-              Username&nbsp;
-              <Tooltip title="What do you want others to call you?">
+              Title&nbsp;
+              <Tooltip title="Producer, DJ, Songwriter, Drummer, Singer? You can put anything/multiple.">
                 <Icon type="question-circle-o" />
               </Tooltip>
             </span>
           )}>
-          {getFieldDecorator('nickname', {
+          {getFieldDecorator('title', {
             rules: [
-              { required: true, message: 'Please input your nickname!', whitespace: true }
+              { required: true, message: 'Please input a title. What do you do?', whitespace: true }
+            ],
+          })(
+            <Input />
+          )}
+        </FormItem>
+        <FormItem
+          label={(
+            <span>
+              Genre&nbsp;
+              <Tooltip title="Hip-hop, Electro, Pop, Trap? You can put as many or as little as you'd like.">
+                <Icon type="question-circle-o" />
+              </Tooltip>
+            </span>
+          )}>
+          {getFieldDecorator('genre', {
+            rules: [
+              { required: true, message: 'Please input a genre.', whitespace: true }
             ],
           })(
             <Input />
