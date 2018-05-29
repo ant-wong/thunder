@@ -15,7 +15,7 @@ class SignUp extends Component  {
     e.preventDefault()
     this.props.form.validateFieldsAndScroll((err, values) => {
       axios.post('http://localhost:6060/artists', {
-        values: values
+        values
       })
         .then(function (response) {
           console.log(response);

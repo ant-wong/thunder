@@ -1,5 +1,10 @@
 const express = require('express')
       router = express.Router()
+      fs = require('fs')
+      
+const bcrypt = require('bcrypt')
+
+let testHash
 
 // GET ALL USERS
 router.get('/artists', (req, res) => {
@@ -14,6 +19,25 @@ router.get('/artists/:id', (req, res) => {
 // CREATE NEW USER
 router.post('/artists', (req, res) => {
   console.log(req.body, 'added user booooiii')
+  bcrypt.genSalt(10, (err, salt) => {
+    bcrypt.hash(req.body.values.password, salt, (err, hash) => {
+      // Store hash in your password DB.
+      console.log(hash)
+      testHash = hash
+      if (err) throw err
+    })
+  })
+})
+
+router.post('/login', (req, res) => {
+  console.log(req.body)
+  bcrypt.compare(req.body.values.password, testHash, function (err, res) {
+    if (res) {
+      console.log('nice')
+    } else {
+      console.log('noooo')
+    }
+  })
 })
 
 // UPDATE USER INFO
