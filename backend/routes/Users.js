@@ -67,13 +67,14 @@ router.post('/login', (req, res) => {
 
 // UPDATE USER INFO
 router.put('/artists/:id', (req, res) => {
+  console.log(req.body, req.params.id)
   knex('users').where('id', req.params.id)
     .update({
-      title: req.body.title,
-      genre: req.body.genre
+      title: req.body.values.title,
+      genre: req.body.values.genre
     })
     .then(() => {
-      knex.selet()
+      knex.select()
         .from('users')
         .then((users) => {
           console.log(users)

@@ -4,6 +4,7 @@ import { Switch, Route, Link } from 'react-router-dom'
 import './styles/theme.css'
 import Landing from './components/Landing'
 import SignUp from './components/SignUp'
+import Update from './components/Update'
 
 class App extends Component {
   render() {
@@ -19,6 +20,9 @@ class App extends Component {
           }} />
           <Route path="/signup" render={() => {
             return <SignUp />
+          }} />
+          <Route path="/update" render={() => {
+            return <Update />
           }} />
         </Switch>
       </div>

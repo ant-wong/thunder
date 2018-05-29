@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import axios from 'axios'
 
-import { Form, Input, Tooltip, Icon, Row, Col, Checkbox, Button } from 'antd'
+import { Form, Input, Tooltip, Icon, Checkbox, Button } from 'antd'
 
 const FormItem = Form.Item
 
@@ -60,8 +60,8 @@ class SignUp extends Component  {
           label="E-mail">
           {getFieldDecorator('email', {
             rules: [
-              { type: 'email', message: 'This is not a vlid e-mail.' }, 
-              { required: true, message: 'Please input and e-mail.' }
+              { type: 'email', message: 'This is not a valid e-mail.' }, 
+              { required: true, message: 'Please input an e-mail.' }
             ],
           })(
             <Input />
@@ -78,7 +78,7 @@ class SignUp extends Component  {
           )}>
           {getFieldDecorator('username', {
             rules: [
-              { required: true, message: 'Please input your nickname!', whitespace: true }
+              { required: true, message: 'Please input a username.', whitespace: true }
             ],
           })(
             <Input />
