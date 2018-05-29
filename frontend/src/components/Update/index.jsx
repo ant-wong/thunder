@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import axios from 'axios'
 
-import { Form, Input, Tooltip, Icon, Checkbox, Button } from 'antd'
+import { Form, Input, Tooltip, Icon, Button } from 'antd'
 const FormItem = Form.Item
 
 class Update extends Component {
@@ -10,18 +10,31 @@ class Update extends Component {
   handleSubmit = (e) => {
     e.preventDefault()
     this.props.form.validateFieldsAndScroll((err, values) => {
-      axios.put('http://localhost:6060/artists/4', {
+      axios.put('http://localhost:6060/artists/2', {
         values
       })
-        .then(function (response) {
-          console.log(response);
-        })
-        .catch(function (error) {
-          console.log(error);
-        })
+      .then(function (response) {
+        console.log(response)
+      })
+      .catch(function (error) {
+        console.log(error)
+      })
       if (!err) {
         console.log('Received values of form: ', values)
       }
+    })
+  }
+
+  handleDelete = (e) => {
+    e.preventDefault()
+    axios.delete('http://localhost:6060/artists/7', {
+      test: 'test'
+    })
+    .then(function (response) {
+      console.log(response)
+    })
+    .catch(function (error) {
+      console.log(error)
     })
   }
 
@@ -30,7 +43,7 @@ class Update extends Component {
 
     return (
       <div>
-        <h1>MOCK UPDATE</h1>
+        <h1>MOCK UPDATE AND DELETE</h1>
         <Form onSubmit={this.handleSubmit}>
           <FormItem
             label="E-mail">
@@ -97,6 +110,8 @@ class Update extends Component {
             <Button type="primary" htmlType="submit">Update</Button>
           </FormItem>
         </Form>
+
+        <Button type="danger" onClick={this.handleDelete}>DELETE</Button>
       </div>
     )
   }

@@ -55,23 +55,29 @@ router.post('/artists', (req, res) => {
 
 // LOG IN
 router.post('/login', (req, res) => {
-  console.log(req.body)
-  bcrypt.compare(req.body.values.password, testHash, function (err, res) {
-    if (res) {
-      console.log('nice')
-    } else {
-      console.log('noooo')
-    }
-  })
+  knex.select()
+    .from('users')
+    .where('username', req.body.values.username)
+    .then((user) => {
+      bcrypt.compare(req.body.values.password, user[0].hashed_password, function (err, response) {
+        if (response) {
+          res.send(response)
+        } else {
+          res.send(response)
+        }
+      })
+    })
 })
 
 // UPDATE USER INFO
 router.put('/artists/:id', (req, res) => {
-  console.log(req.body, req.params.id)
+  const { email, username, title, genre } = req.body.values
   knex('users').where('id', req.params.id)
     .update({
-      title: req.body.values.title,
-      genre: req.body.values.genre
+      email: email,
+      username: username,
+      title: title,
+      genre: genre
     })
     .then(() => {
       knex.select()
@@ -84,7 +90,13 @@ router.put('/artists/:id', (req, res) => {
 
 // DELETE USER
 router.delete('/artists/:id', (req, res) => {
-
+  console.log(req.params.id)
+  knex('users')
+    .where('id', req.params.id)
+    .del()
+    .then((users) => {
+      console.log(users)
+    })
 })
 
 
