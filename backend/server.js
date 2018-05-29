@@ -5,7 +5,7 @@ const express = require('express')
 
 // ROUTES
 const Users = require('./routes/Users')
-const Songs = require('./routes/Songs')
+const Music = require('./routes/Music')
       
 // BODY PARSER
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -19,7 +19,7 @@ app.use((req, res, next) => {
   next()
 })
 
-app.use('/', Users, Songs)
+app.use('/', Users, Music)
 
 app.listen(port, () => {
   console.log(`Tune in on port ${port}`)
