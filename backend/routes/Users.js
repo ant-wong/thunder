@@ -1,11 +1,10 @@
 const express = require('express')
       router = express.Router()
-      fs = require('fs')
       knex = require('../knex')
       
 const bcrypt = require('bcrypt')
+      uuid = require('uuid/v4')
 
-let testHash
 
 // GET ALL USERS
 router.get('/artists', (req, res) => {
@@ -26,31 +25,39 @@ router.get('/artists/:id', (req, res) => {
     })
 })
 
+let tempArr = []
+
+router.get('/pic', (req, res) => {
+  res.json(tempArr)
+})
+
 // CREATE NEW USER
 router.post('/artists', (req, res) => {
-  const { email, username, password, title, genre } = req.body.values
+  console.log(req.body)
+  tempArr.push(req.body.picture)
+  res.send(tempArr)
+  // const { email, username, password, title, genre } = req.body.values
 
-  bcrypt.genSalt(10, (err, salt) => {
-    bcrypt.hash(password, salt, (err, hash) => {
-      // Store hash in your password DB.
-      knex('users')
-        .insert({
-          email: email,
-          hashed_password: hash,
-          username: username,
-          title: title,
-          genre: genre
-        })
-        .then(() => {
-          knex.select()
-            .from('users')
-            .then((users) => {
-              console.log(users)
-            })
-        })
-      if (err) throw err
-    })
-  })
+  // bcrypt.genSalt(10, (err, salt) => {
+  //   bcrypt.hash(password, salt, (err, hash) => {
+  //     knex('users')
+  //       .insert({
+  //         email: email,
+  //         hashed_password: hash,
+  //         username: username,
+  //         title: title,
+  //         genre: genre
+  //       })
+  //       .then(() => {
+  //         knex.select()
+  //           .from('users')
+  //           .then((users) => {
+  //             console.log(users)
+  //           })
+  //       })
+  //     if (err) throw err
+  //   })
+  // })
 })
 
 // LOG IN

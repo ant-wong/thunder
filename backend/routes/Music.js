@@ -1,5 +1,6 @@
 const express = require('express')
       router = express.Router()
+      knex = require('../knex')
 
 // GET ALL SONGS
 router.get('/songs', (req, res) => {
@@ -9,6 +10,11 @@ router.get('/songs', (req, res) => {
 // GET SINGLE SONG
 router.get('/songs/:id', (req, res) => {
   res.send('just one rn pls')
+})
+
+// GET USER SPECIFIC SONGS
+router.get('/songs/:id', (req, res) => {
+  // knex.from('songs')
 })
 
 // POST NEW SONG

@@ -2,26 +2,81 @@ import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import axios from 'axios'
 
-import { Form, Input, Tooltip, Icon, Checkbox, Button } from 'antd'
+import { Form, Input, Tooltip, Upload, Icon, Checkbox, Button, message } from 'antd'
 
 const FormItem = Form.Item
+
+const props = {
+  name: 'file',
+  action: '//jsonplaceholder.typicode.com/posts/',
+  headers: {
+    authorization: 'authorization-text',
+  },
+  onChange(info) {
+    if (info.file.status !== 'uploading') {
+      console.log(info.file, info.fileList)
+    }
+    if (info.file.status === 'done') {
+      message.success(`${info.file.name} file uploaded successfully`)
+    } else if (info.file.status === 'error') {
+      message.error(`${info.file.name} file upload failed.`)
+    }
+  },
+}
+
+// function getBase64(img, callback) {
+//   const reader = new FileReader()
+//   reader.addEventListener('load', () => callback(reader.result))
+//   reader.readAsDataURL(img)
+// }
+
+// function beforeUpload(file) {
+//   const isJPG = file.type === 'image/jpeg'
+//   if (!isJPG) {
+//     message.error('You can only upload JPG file!')
+//   }
+//   const isLt2M = file.size / 2048 / 2048 < 4
+//   if (!isLt2M) {
+//     message.error('Image must smaller than 2MB!')
+//   }
+//   return isJPG && isLt2M
+// }
+
 
 class SignUp extends Component  {
   state = {
     confirmDirty: false,
+    // loading: false,
   }
 
+  // handleChange = (info) => {
+  //   if (info.file.status === 'uploading') {
+  //     this.setState({ 
+  //       loading: true 
+  //     })
+  //     return
+  //   }
+  //   if (info.file.status === 'done') {
+  //     // Get this url from response in real world.
+  //     getBase64(info.file.originFileObj, imageUrl => this.setState({
+  //       imageUrl,
+  //       loading: false,
+  //     }))
+  //   }
+  // }
+
+  // SUBMIT FORM
   handleSubmit = (e) => {
     e.preventDefault()
     this.props.form.validateFieldsAndScroll((err, values) => {
       axios.post('http://localhost:6060/artists', {
-        values
+        values,
       })
-        .then(function (response) {
-          console.log(response);
+        .then((res) => {
+          console.log(res)
         })
-        .catch(function (error) {
-          console.log(error);
+        .catch((error) => {
+          console.log(error)
         })
       if (!err) {
         console.log('Received values of form: ', values)
@@ -34,6 +89,7 @@ class SignUp extends Component  {
     this.setState({ confirmDirty: this.state.confirmDirty || !!value })
   }
 
+  // COMPARE PASSWORDS
   compareToFirstPassword = (rule, value, callback) => {
     const form = this.props.form
     if (value && value !== form.getFieldValue('password')) {
@@ -44,7 +100,7 @@ class SignUp extends Component  {
   }
 
   validateToNextPassword = (rule, value, callback) => {
-    const form = this.props.form;
+    const form = this.props.form
     if (value && this.state.confirmDirty) {
       form.validateFields(['confirm'], { force: true })
     }
@@ -53,7 +109,14 @@ class SignUp extends Component  {
  
   render() {
     const { getFieldDecorator } = this.props.form
+    // const imageUrl = this.state.imageUrl
 
+    // const uploadButton = (
+    //   <div>
+    //     <Icon type={this.state.loading ? 'loading' : 'plus'} />
+    //     <div className="ant-upload-text">Upload</div>
+    //   </div>
+    // )
     return (
       <Form onSubmit={this.handleSubmit}>
         <FormItem
@@ -140,6 +203,21 @@ class SignUp extends Component  {
             <Input />
           )}
         </FormItem>
+        <Upload {...props}>
+          <Button>
+            <Icon type="upload" /> NOT WORKING RIGHT NOW
+          </Button>
+        </Upload>
+        {/* <Upload
+          name="avatar"
+          listType="picture-card"
+          className="avatar-uploader"
+          showUploadList={false}
+          action="http://localhost:6060/artists"
+          beforeUpload={beforeUpload}
+          onChange={this.handleChange}>
+          {imageUrl ? <img src={imageUrl} alt="avatar" /> : uploadButton}
+        </Upload> */}
         <FormItem >
           {getFieldDecorator('agreement', {
             valuePropName: 'checked',
