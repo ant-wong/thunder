@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { withRouter, Link } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import axios from 'axios'
 
 import { Row, Col, Form, Icon, Input, Button, Checkbox } from 'antd'
@@ -30,44 +30,48 @@ class Landing extends Component {
   render() {
     const { getFieldDecorator } = this.props.form
     return (
-      <Row>
-        <Col span={8} offset={8}>
-          <Form onSubmit={this.handleSubmit} className="login-form">
-            <FormItem>
-              {getFieldDecorator('username', {
-                rules: [
-                  { required: true, message: 'Please input your username' }
-                ],
-              })(
-                <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Username" />
-              )}
-            </FormItem>
-            <FormItem>
-              {getFieldDecorator('password', {
-                rules: [
-                  { required: true, message: 'Please input your password' }
-                ],
-              })(
-                <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="password" placeholder="Password" />
-              )}
-            </FormItem>
-            <FormItem>
-              {getFieldDecorator('remember', {
-                valuePropName: 'checked',
-                initialValue: true,
-              })(
-                <Checkbox>Remember me</Checkbox>
-              )}
-              <Button type="primary" htmlType="submit" className="login-form-button">
-                Log in
-              </Button>
-              <Link to="/signup">
-                <p className="login-form-forgot">Sign up</p>
-              </Link>
-            </FormItem>
-          </Form>
-        </Col>
-      </Row>
+      <div>
+        <h1>welcome.</h1>
+        <Row>
+          <Col span={10} offset={7}>
+            <Form onSubmit={this.handleSubmit} className="login-form">
+              <FormItem>
+                {getFieldDecorator('username', {
+                  rules: [
+                    { required: true, message: 'Please input your username' }
+                  ],
+                })(
+                  <Input prefix={ 
+                    <Icon type="user" style={{ color: '#EC407A' }} />
+                  } placeholder="Username" className="login-input"/>
+                )}
+              </FormItem>
+              <FormItem>
+                {getFieldDecorator('password', {
+                  rules: [
+                    { required: true, message: 'Please input your password' }
+                  ],
+                })(
+                  <Input prefix={
+                    <Icon type="lock" style={{ color: '#EC407A' }} />
+                  } type="password" placeholder="Password" className="login-input"/>
+                )}
+              </FormItem>
+              <FormItem>
+                {getFieldDecorator('remember', {
+                  valuePropName: 'unchecked',
+                  initialValue: true,
+                })(
+                  <Checkbox>Remember me</Checkbox>
+                )}
+                <Button type="primary" htmlType="submit" className="login-form-button">
+                  LOG IN
+                </Button>
+              </FormItem>
+            </Form>
+          </Col>
+        </Row>
+      </div>
     )
   }
 }

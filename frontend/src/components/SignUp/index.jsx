@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import axios from 'axios'
 
-import { Form, Input, Tooltip, Upload, Icon, Checkbox, Button, message } from 'antd'
+import { Form, Input, Tooltip, Upload, Icon, Checkbox, Button, message, Row, Col } from 'antd'
 
 const FormItem = Form.Item
 
@@ -118,117 +118,124 @@ class SignUp extends Component  {
     //   </div>
     // )
     return (
-      <Form onSubmit={this.handleSubmit}>
-        <FormItem
-          label="E-mail">
-          {getFieldDecorator('email', {
-            rules: [
-              { type: 'email', message: 'This is not a valid e-mail.' }, 
-              { required: true, message: 'Please input an e-mail.' }
-            ],
-          })(
-            <Input />
-          )}
-        </FormItem>
-        <FormItem
-          label={(
-            <span>
-              Username&nbsp;
-              <Tooltip title="What do you want others to call you?">
-                <Icon type="question-circle-o" />
-              </Tooltip>
-            </span>
-          )}>
-          {getFieldDecorator('username', {
-            rules: [
-              { required: true, message: 'Please input a username.', whitespace: true }
-            ],
-          })(
-            <Input />
-          )}
-        </FormItem>
-        <FormItem
-          label="Password">
-          {getFieldDecorator('password', {
-            rules: [
-              { required: true, message: 'Please input a password.' }, 
-              { validator: this.validateToNextPassword }
-            ],
-          })(
-            <Input type="password" />
-          )}
-        </FormItem>
-        <FormItem
-          label="Confirm Password">
-          {getFieldDecorator('confirm', {
-            rules: [
-              { required: true, message: 'Please confirm your password!' }, 
-              { validator: this.compareToFirstPassword }
-            ],
-          })(
-            <Input type="password" onBlur={this.handleConfirmBlur} />
-          )}
-        </FormItem>
-        <FormItem
-          label={(
-            <span>
-              Title&nbsp;
-              <Tooltip title="Producer, DJ, Songwriter, Drummer, Singer? You can put anything/multiple.">
-                <Icon type="question-circle-o" />
-              </Tooltip>
-            </span>
-          )}>
-          {getFieldDecorator('title', {
-            rules: [
-              { required: true, message: 'Please input a title. What do you do?', whitespace: true }
-            ],
-          })(
-            <Input />
-          )}
-        </FormItem>
-        <FormItem
-          label={(
-            <span>
-              Genre&nbsp;
-              <Tooltip title="Hip-hop, Electro, Pop, Trap? You can put as many or as little as you'd like.">
-                <Icon type="question-circle-o" />
-              </Tooltip>
-            </span>
-          )}>
-          {getFieldDecorator('genre', {
-            rules: [
-              { required: true, message: 'Please input a genre.', whitespace: true }
-            ],
-          })(
-            <Input />
-          )}
-        </FormItem>
-        <Upload {...props}>
-          <Button>
-            <Icon type="upload" /> NOT WORKING RIGHT NOW
-          </Button>
-        </Upload>
-        {/* <Upload
-          name="avatar"
-          listType="picture-card"
-          className="avatar-uploader"
-          showUploadList={false}
-          action="http://localhost:6060/artists"
-          beforeUpload={beforeUpload}
-          onChange={this.handleChange}>
-          {imageUrl ? <img src={imageUrl} alt="avatar" /> : uploadButton}
-        </Upload> */}
-        <FormItem >
-          {getFieldDecorator('agreement', {
-            valuePropName: 'checked',
-          })(
-            <Checkbox>I have read the <a href="">agreement</a></Checkbox>
-          )}
-        </FormItem>
-        <FormItem >
-          <Button type="primary" htmlType="submit">Register</Button>
-        </FormItem>
-      </Form>
+      <Row className="signup-body">
+        <Col span={12} offset={2}>
+          <Form onSubmit={this.handleSubmit}>
+            <FormItem
+              label="E-mail">
+              {getFieldDecorator('email', {
+                rules: [
+                  { type: 'email', message: 'This is not a valid e-mail.' }, 
+                  { required: true, message: 'Please input an e-mail.' }
+                ],
+              })(
+                <Input />
+              )}
+            </FormItem>
+            <FormItem
+              label={(
+                <span>
+                  Username&nbsp;
+                  <Tooltip title="What do you want others to call you?">
+                    <Icon type="question-circle-o" />
+                  </Tooltip>
+                </span>
+              )}>
+              {getFieldDecorator('username', {
+                rules: [
+                  { required: true, message: 'Please input a username.', whitespace: true }
+                ],
+              })(
+                <Input />
+              )}
+            </FormItem>
+            <FormItem
+              label="Password">
+              {getFieldDecorator('password', {
+                rules: [
+                  { required: true, message: 'Please input a password.' }, 
+                  { validator: this.validateToNextPassword }
+                ],
+              })(
+                <Input type="password" />
+              )}
+            </FormItem>
+            <FormItem
+              label="Confirm Password">
+              {getFieldDecorator('confirm', {
+                rules: [
+                  { required: true, message: 'Please confirm your password!' }, 
+                  { validator: this.compareToFirstPassword }
+                ],
+              })(
+                <Input type="password" onBlur={this.handleConfirmBlur} />
+              )}
+            </FormItem>
+            <FormItem
+              label={(
+                <span>
+                  Title&nbsp;
+                  <Tooltip title="Producer, DJ, Songwriter, Drummer, Singer? You can put anything/multiple.">
+                    <Icon type="question-circle-o" />
+                  </Tooltip>
+                </span>
+              )}>
+              {getFieldDecorator('title', {
+                rules: [
+                  { required: true, message: 'Please input a title. What do you do?', whitespace: true }
+                ],
+              })(
+                <Input />
+              )}
+            </FormItem>
+            <FormItem
+              label={(
+                <span>
+                  Genre&nbsp;
+                  <Tooltip title="Hip-hop, Electro, Pop, Trap? You can put as many or as little as you'd like.">
+                    <Icon type="question-circle-o" />
+                  </Tooltip>
+                </span>
+              )}>
+              {getFieldDecorator('genre', {
+                rules: [
+                  { required: true, message: 'Please input a genre.', whitespace: true }
+                ],
+              })(
+                <Input />
+              )}
+            </FormItem>
+            <Upload {...props}>
+              <Button>
+                <Icon type="upload" /> NOT WORKING RIGHT NOW
+              </Button>
+            </Upload>
+            {/* <Upload
+              name="avatar"
+              listType="picture-card"
+              className="avatar-uploader"
+              showUploadList={false}
+              action="http://localhost:6060/artists"
+              beforeUpload={beforeUpload}
+              onChange={this.handleChange}>
+              {imageUrl ? <img src={imageUrl} alt="avatar" /> : uploadButton}
+            </Upload> */}
+            <FormItem >
+              {getFieldDecorator('agreement', {
+                valuePropName: 'checked',
+              })(
+                <Checkbox>I have read the <a href="">agreement</a></Checkbox>
+              )}
+            </FormItem>
+            <FormItem >
+              <Button type="primary" htmlType="submit" className="register-button">Register</Button>
+            </FormItem>
+          </Form>
+        </Col>
+        <Col span={10}>
+          <img src="" alt="Sign Up"/>
+        </Col>
+      </Row>
     )
   }
 }
