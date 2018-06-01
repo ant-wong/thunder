@@ -1,16 +1,32 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-// import { Provider } from 'react-redux'
-import { BrowserRouter as Router } from 'react-router-dom'
+import { Provider, connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { BrowserRouter as Router, withRouter } from 'react-router-dom'
 
-// IMPORT STORE
 import App from './App'
-// import store from './store/index'
+import store from './store'
 import registerServiceWorker from './registerServiceWorker'
+import * as actionCreators from './actions'
+
+const mapStateToProps = (state) => {
+  return {
+    users: state.users,
+    music: state.music
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators(actionCreators, dispatch)
+}
+
+const ReduxApp = withRouter(connect(mapStateToProps, mapDispatchToProps)(App))
 
 ReactDOM.render(
-  <Router>
-    <App />
-  </Router>,
+  <Provider store={store}>
+    <Router>
+      <ReduxApp />
+    </Router>
+  </Provider>,
    document.getElementById('root'))
 registerServiceWorker()

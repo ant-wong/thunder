@@ -1,45 +1,59 @@
 import * as types from '../constants/actionTypes'
+import axios from 'axios'
 
 // USERS
-export const addUser = () => {
+export const addUser = (user) => (
+  axios.post('http://localhost:6060/artists',
+    user
+  )
+    .then((res) => {
+      console.log(res.data)
+    })
+    .catch((error) => {
+      console.log(error)
+    }),
+  {
+    type: types.ADD_USER,
+    user
+  }
+)
 
-}
+// export const getOneUser = () => ({
 
-export const getOneUser = () => {
+// })
 
-}
+export const getAllUsers = (users) => ({
+  type: types.GET_ALLUSERS,
+  users
+})
 
-export const getAllUsers = () => {
+// export const editUser = () => {
 
-}
+// }
 
-export const editUser = () => {
+// export const deleteUser = () => {
 
-}
+// }
 
-export const deleteUser = () => {
+// export const 
 
-}
+// // MUSIC
+// export const addSong = () => {
 
-export const 
+// }
 
-// MUSIC
-export const addSong = () => {
-
-}
-
-export const getOneSong = () => {
+// export const getOneSong = () => {
   
-}
+// }
 
-export const getAllSongs = () => {
+// export const getAllSongs = () => {
 
-}
+// }
 
-export const editSong = () => {
+// export const editSong = () => {
 
-}
+// }
 
-export const deleteSong = () => {
+// export const deleteSong = () => {
 
-}
+// }

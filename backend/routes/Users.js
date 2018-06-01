@@ -34,30 +34,30 @@ router.get('/artists/:id', (req, res) => {
 // CREATE NEW USER
 router.post('/artists', (req, res) => {
   console.log(req.body)
-  // tempArr.push(req.body.picture)
-  // res.send(tempArr)
-  const { email, username, password, title, genre } = req.body.values
+  // tempArr.push(req.body)
+  res.send(req.body)
+  // const { email, username, password, title, genre } = req.body.values
 
-  bcrypt.genSalt(10, (err, salt) => {
-    bcrypt.hash(password, salt, (err, hash) => {
-      knex('users')
-        .insert({
-          email: email,
-          hashed_password: hash,
-          username: username,
-          title: title,
-          genre: genre
-        })
-        .then(() => {
-          knex.select()
-            .from('users')
-            .then((users) => {
-              console.log(users)
-            })
-        })
-      if (err) throw err
-    })
-  })
+  // bcrypt.genSalt(10, (err, salt) => {
+  //   bcrypt.hash(password, salt, (err, hash) => {
+  //     knex('users')
+  //       .insert({
+  //         email: email,
+  //         hashed_password: hash,
+  //         username: username,
+  //         title: title,
+  //         genre: genre
+  //       })
+  //       .then(() => {
+  //         knex.select()
+  //           .from('users')
+  //           .then((users) => {
+  //             console.log(users)
+  //           })
+  //       })
+  //     if (err) throw err
+  //   })
+  // })
 })
 
 // LOG IN

@@ -11,12 +11,13 @@ import Update from './components/Update'
 class App extends Component {
   render() {
     console.log(this.props)
+    console.log(this.state)
     return (
       <div className="App">
         <Navbar />
         <Switch>
           <Route exact path="/" render={() => {
-            return <Landing />
+            return <Landing {...this.props}/>
           }} />
           <Route path="/signup" render={() => {
             return <SignUp />

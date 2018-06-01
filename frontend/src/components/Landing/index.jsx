@@ -62,7 +62,7 @@ class Landing extends Component {
                   valuePropName: 'unchecked',
                   initialValue: true,
                 })(
-                  <Checkbox>Remember me</Checkbox>
+                  <Checkbox onClick={() => {this.props.addUser({ name: 'me', age: 69 })}}>Remember me</Checkbox>
                 )}
                 <Button type="primary" htmlType="submit" className="login-form-button">
                   LOG IN

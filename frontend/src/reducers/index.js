@@ -4,7 +4,7 @@ import music from './music'
 
 
 const thunderData = combineReducers({
-  // users,
+  users,
   // music
 })
 

@@ -1,7 +1,15 @@
-// import { createStore } from 'redux'
-// import reducers from '../reducers/index'
+import { createStore, compose } from 'redux'
 
+// REDUCERS
+import reducers from '../reducers/index'
 
-// const store = createStore(reducers)
+// REDUX DEV TOOLS
+const enchancers = compose(
+  window.devToolsExtension ? window.devToolsExtension() : f => f
+)
 
-// export default store
+const store = createStore(reducers, enchancers)
+
+console.log(store)
+
+export default store
