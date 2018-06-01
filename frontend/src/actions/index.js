@@ -1,22 +1,10 @@
 import * as types from '../constants/actionTypes'
-import axios from 'axios'
 
 // USERS
-export const addUser = (user) => (
-  axios.post('http://localhost:6060/artists',
-    user
-  )
-    .then((res) => {
-      console.log(res.data)
-    })
-    .catch((error) => {
-      console.log(error)
-    }),
-  {
-    type: types.ADD_USER,
-    user
-  }
-)
+export const addUser = (user) => ({
+  type: types.ADD_USER,
+  user
+})
 
 // export const getOneUser = () => ({
 

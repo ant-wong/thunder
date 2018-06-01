@@ -10,6 +10,6 @@ const enchancers = compose(
 
 const store = createStore(reducers, enchancers)
 
-console.log(store)
+console.log(store.getState())
 
 export default store

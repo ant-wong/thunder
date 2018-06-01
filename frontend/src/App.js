@@ -9,9 +9,13 @@ import SignUp from './components/SignUp'
 import Update from './components/Update'
 
 class App extends Component {
+
+  // componentDidUpdate() {
+  //   console.log(this.state)
+  // }
+
   render() {
     console.log(this.props)
-    console.log(this.state)
     return (
       <div className="App">
         <Navbar />

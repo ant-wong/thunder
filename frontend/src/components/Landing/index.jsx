@@ -8,6 +8,20 @@ const FormItem = Form.Item
 
 class Landing extends Component {
 
+  submitUser = (e) => {
+    e.preventDefault()
+    axios.post('http://localhost:6060/artists', {
+      name: 'ant',
+      age: 666
+    })
+    .then((res) => {
+      this.props.addUser(res.data)
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+  }
+
   handleSubmit = (e) => {
     e.preventDefault()
 
@@ -62,7 +76,7 @@ class Landing extends Component {
                   valuePropName: 'unchecked',
                   initialValue: true,
                 })(
-                  <Checkbox onClick={() => {this.props.addUser({ name: 'me', age: 69 })}}>Remember me</Checkbox>
+                  <Checkbox onClick={this.testClick}>Remember me</Checkbox>
                 )}
                 <Button type="primary" htmlType="submit" className="login-form-button">
                   LOG IN
