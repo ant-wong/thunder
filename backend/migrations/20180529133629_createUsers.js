@@ -9,7 +9,7 @@ exports.up = function(knex, Promise) {
     table.string('username').unique().notNullable()
     table.string('title').notNullable()
     table.string('genre').notNullable()
-    table.string('profile-pic')
+    table.string('profilepic')
   })
 };
 

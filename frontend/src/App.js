@@ -24,7 +24,7 @@ class App extends Component {
             return <Landing {...this.props}/>
           }} />
           <Route path="/signup" render={() => {
-            return <SignUp />
+            return <SignUp {...this.props}/>
           }} />
           <Route path="/update" render={() => {
             return <Update />

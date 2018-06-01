@@ -2,68 +2,15 @@ import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import axios from 'axios'
 
-import { Form, Input, Tooltip, Upload, Icon, Checkbox, Button, message, Row, Col } from 'antd'
+import { Form, Input, Tooltip, Icon, Checkbox, Button, Upload, message, Row, Col } from 'antd'
 
 const FormItem = Form.Item
-
-const props = {
-  name: 'file',
-  action: '//jsonplaceholder.typicode.com/posts/',
-  headers: {
-    authorization: 'authorization-text',
-  },
-  onChange(info) {
-    if (info.file.status !== 'uploading') {
-      console.log(info.file, info.fileList)
-    }
-    if (info.file.status === 'done') {
-      message.success(`${info.file.name} file uploaded successfully`)
-    } else if (info.file.status === 'error') {
-      message.error(`${info.file.name} file upload failed.`)
-    }
-  },
-}
-
-// function getBase64(img, callback) {
-//   const reader = new FileReader()
-//   reader.addEventListener('load', () => callback(reader.result))
-//   reader.readAsDataURL(img)
-// }
-
-// function beforeUpload(file) {
-//   const isJPG = file.type === 'image/jpeg'
-//   if (!isJPG) {
-//     message.error('You can only upload JPG file!')
-//   }
-//   const isLt2M = file.size / 2048 / 2048 < 4
-//   if (!isLt2M) {
-//     message.error('Image must smaller than 2MB!')
-//   }
-//   return isJPG && isLt2M
-// }
-
 
 class SignUp extends Component  {
   state = {
     confirmDirty: false,
-    // loading: false,
+    loading: false
   }
-
-  // handleChange = (info) => {
-  //   if (info.file.status === 'uploading') {
-  //     this.setState({ 
-  //       loading: true 
-  //     })
-  //     return
-  //   }
-  //   if (info.file.status === 'done') {
-  //     // Get this url from response in real world.
-  //     getBase64(info.file.originFileObj, imageUrl => this.setState({
-  //       imageUrl,
-  //       loading: false,
-  //     }))
-  //   }
-  // }
 
   // SUBMIT FORM
   handleSubmit = (e) => {
@@ -73,7 +20,7 @@ class SignUp extends Component  {
         values,
       })
         .then((res) => {
-          console.log(res)
+          this.props.addUser(res.data[0])
         })
         .catch((error) => {
           console.log(error)
@@ -106,17 +53,51 @@ class SignUp extends Component  {
     }
     callback()
   }
+
+  // IMAGE UPLOAD
+  getBase64 = (img, callback) => {
+    const reader = new FileReader()
+    reader.addEventListener('load', () => callback(reader.result))
+    reader.readAsDataURL(img)
+  }
+
+  beforeUpload = (file) => {
+    const isJPG = file.type === 'image/jpeg'
+    if (!isJPG) {
+      message.error('You can only upload JPG file!')
+    }
+    const isLt2M = file.size / 1024 / 1024 < 2
+    if (!isLt2M) {
+      message.error('Image must smaller than 2MB!')
+    }
+    return isJPG && isLt2M
+  }
+
+  handleChange = (info) => {
+    if (info.file.status === 'uploading') {
+      this.setState({ loading: true })
+      return;
+    }
+    if (info.file.status === 'done') {
+      // Get this url from response in real world.
+      this.getBase64(info.file.originFileObj, imageUrl => this.setState({
+        imageUrl,
+        loading: false,
+      }))
+    }
+  }
  
   render() {
     const { getFieldDecorator } = this.props.form
-    // const imageUrl = this.state.imageUrl
+    const imageUrl = this.state.imageUrl
 
-    // const uploadButton = (
-    //   <div>
-    //     <Icon type={this.state.loading ? 'loading' : 'plus'} />
-    //     <div className="ant-upload-text">Upload</div>
-    //   </div>
-    // )
+    const uploadButton = (
+      <div>
+        <Icon type={this.state.loading ? 'loading' : 'plus'} />
+        <div className="ant-upload-text">Upload</div>
+      </div>
+    )
+
     return (
       <Row className="signup-body">
         <Col span={12} offset={2}>
@@ -205,21 +186,33 @@ class SignUp extends Component  {
                 <Input />
               )}
             </FormItem>
-            <Upload {...props}>
-              <Button>
-                <Icon type="upload" /> NOT WORKING RIGHT NOW
-              </Button>
-            </Upload>
-            {/* <Upload
+            <FormItem
+              label={(
+                <span>
+                  Profile Picture&nbsp;
+                  <Tooltip title="Please input a link to a hosted image. Upload currently not working.">
+                    <Icon type="question-circle-o" />
+                  </Tooltip>
+                </span>
+              )}>
+              {getFieldDecorator('pic', {
+                rules: [
+                  { required: false, message: 'Please provide a link.', whitespace: true }
+                ],
+              })(
+                <Input />
+              )}
+            </FormItem>
+            <Upload
               name="avatar"
               listType="picture-card"
               className="avatar-uploader"
               showUploadList={false}
-              action="http://localhost:6060/artists"
-              beforeUpload={beforeUpload}
+              action="//jsonplaceholder.typicode.com/posts/"
+              beforeUpload={this.beforeUpload}
               onChange={this.handleChange}>
               {imageUrl ? <img src={imageUrl} alt="avatar" /> : uploadButton}
-            </Upload> */}
+            </Upload>
             <FormItem >
               {getFieldDecorator('agreement', {
                 valuePropName: 'checked',
