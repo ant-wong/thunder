@@ -8,7 +8,6 @@ const users = (state = [], action) => {
         action.user
       ]
     case types.GET_ALLUSERS:
-    console.log(action)
      return action.users
     // case types.GET_SINGLEUSER:
     //   // return 

@@ -1,37 +1,49 @@
 import React, { Component } from 'react'
 import { Switch, Route } from 'react-router-dom'
+import axios from 'axios'
 
 import './styles/theme.css'
 import Navbar from './components/Navbar'
 import Landing from './components/Landing'
 import Profile from './components/Profile'
 import SignUp from './components/SignUp'
+import Explore from './components/Explore'
 import Update from './components/Update'
+import NotFound  from './components/NotFound'
 
 class App extends Component {
 
-  // componentDidUpdate() {
-  //   console.log(this.state)
-  // }
+  componentWillMount() {
+    axios.get('http://localhost:6060/artists')
+      .then((res) => {
+        this.props.getAllUsers(res.data)
+      })
+  }
 
   render() {
     console.log(this.props)
+    // console.log(this.state)
     return (
       <div className="App">
         <Navbar />
         <Switch>
           <Route exact path="/" render={() => {
-            return <Landing {...this.props}/>
+            return <Landing {...this.props} />
           }} />
           <Route path="/signup" render={() => {
-            return <SignUp {...this.props}/>
+            return <SignUp {...this.props} />
           }} />
+          {/* TEST ROUTE */}
           <Route path="/update" render={() => {
             return <Update />
           }} />
-          <Route path="/:id" render={() => {
+          <Route path="/artist/:id" render={() => {
             return <Profile />
           }} />
+          <Route path="/explore" render={() => {
+            return <Explore {...this.props} />
+          }} />
+          <Route path="*" component={NotFound} />
         </Switch>
       </div>
     )
