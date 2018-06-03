@@ -6,7 +6,7 @@ class Profile extends Component {
   componentDidMount() {
     axios.get(`http://localhost:6060/artists/${this.props.match.params.id}`)
       .then((res) => {
-        console.log(res.data)
+        this.props.getOneUser(res.data[0])
       })
   }
 

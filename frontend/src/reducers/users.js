@@ -8,9 +8,9 @@ const users = (state = [], action) => {
         action.user
       ]
     case types.GET_ALLUSERS:
-     return action.users
-    // case types.GET_SINGLEUSER:
-    //   // return 
+      return action.users
+    case types.GET_SINGLEUSER:
+      return action.user 
     // case types.EDIT_USER:
     //   // return
     // case types.DELETE_USER:

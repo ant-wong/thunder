@@ -6,9 +6,10 @@ export const addUser = (user) => ({
   user
 })
 
-// export const getOneUser = () => ({
-
-// })
+export const getOneUser = (user) => ({
+  type: types.GET_SINGLEUSER,
+  user
+})
 
 export const getAllUsers = (users) => ({
   type: types.GET_ALLUSERS,
