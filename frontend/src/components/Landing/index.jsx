@@ -16,7 +16,7 @@ class Landing extends Component {
         values
       })
       .then((res) => {
-        console.log(res)
+        res.data ? this.props.history.push(`/artist/${res.data.user.id}`) : this.props.history.push('/')
       })
       .catch((error) => {
         console.log(error)

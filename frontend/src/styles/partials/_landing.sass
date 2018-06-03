@@ -1,16 +1,19 @@
+$primary-pink: #F8BBD0
+
 .login-form
   position: relative
   top: 20vh
-  color: black
+  .ant-input
+    font-family: 'Nanum Gothic', sans-serif
   .login-form-button
     font-family: 'Nanum Gothic', sans-serif
     letter-spacing: 1em
     font-size: 1em
     height: 4vh
     width: 100%
-    background-color: pink
-    border: pink
+    background-color: $primary-pink
+    border: $primary-pink
   
 .ant-input-affix-wrapper:hover .ant-input:not(.ant-input-disabled) 
-    border-color: pink
-    border-width: 3px !important
+  border-color: $primary-pink
+  border-width: 3px !important

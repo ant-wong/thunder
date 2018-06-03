@@ -10,6 +10,7 @@ import SignUp from './components/SignUp'
 import Explore from './components/Explore'
 import Update from './components/Update'
 import NotFound  from './components/NotFound'
+import Footer from './components/Footer'
 
 class App extends Component {
 
@@ -21,7 +22,7 @@ class App extends Component {
   }
 
   render() {
-    console.log(this.props)
+    // console.log(this.props)
     // console.log(this.state)
     return (
       <div className="App">
@@ -38,13 +39,15 @@ class App extends Component {
             return <Update />
           }} />
           <Route path="/artist/:id" render={() => {
-            return <Profile />
+            return <Profile {...this.props}/>
           }} />
           <Route path="/explore" render={() => {
             return <Explore {...this.props} />
           }} />
           <Route path="*" component={NotFound} />
         </Switch>
+        {/* FOOTER IS BEING DUMB */}
+        {/* <Footer /> */}
       </div>
     )
   }

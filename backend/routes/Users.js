@@ -17,6 +17,7 @@ router.get('/artists', (req, res) => {
 
 // GET SINGLE USER
 router.get('/artists/:id', (req, res) => {
+  console.log(req.params)
   knex.select()
     .from('users')
     .where('id', req.params.id)
@@ -64,7 +65,10 @@ router.post('/login', (req, res) => {
     .then((user) => {
       bcrypt.compare(req.body.values.password, user[0].hashed_password, function (err, response) {
         if (response) {
-          res.send(response)
+          res.send({
+            response,
+            user: user[0]
+          })
           console.log('true')
         } else {
           res.send(response)

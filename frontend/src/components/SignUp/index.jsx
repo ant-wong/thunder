@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import axios from 'axios'
-
 import { Form, Input, Tooltip, Icon, Checkbox, Button, Upload, message, Row, Col } from 'antd'
+
+import lightning from '../../styles/img/lightning.svg'
 
 const FormItem = Form.Item
 
@@ -226,7 +227,7 @@ class SignUp extends Component  {
           </Form>
         </Col>
         <Col span={10}>
-          <img src="" alt="Sign Up"/>
+          <img src={lightning} alt="Sign Up" className="signup-image"/>
         </Col>
       </Row>
     )
