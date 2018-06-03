@@ -11,9 +11,12 @@ class Profile extends Component {
   }
 
   render() {
+    console.log(this.props)
     return (
       <div onClick={this.testGet}>
-        THIS IS MY PROFILE
+       <h1>{this.props.users.title}</h1>
+       <br/>
+       <h2>{this.props.users.genre}</h2>
       </div>
     )
   }
