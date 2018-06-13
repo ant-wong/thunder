@@ -11,8 +11,8 @@ const users = (state = [], action) => {
       return action.users
     case types.GET_SINGLEUSER:
       return action.user 
-    // case types.EDIT_USER:
-    //   // return
+    case types.EDIT_USER:
+      return
     // case types.DELETE_USER:
     //   // return
     default:

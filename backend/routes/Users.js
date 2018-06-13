@@ -58,7 +58,7 @@ router.post('/artists', (req, res) => {
 
 // LOG IN
 router.post('/login', (req, res) => {
-  console.log(req.body)
+  // console.log(req.body)
   knex.select()
     .from('users')
     .where('username', req.body.values.username)
@@ -80,19 +80,22 @@ router.post('/login', (req, res) => {
 
 // UPDATE USER INFO
 router.put('/artists/:id', (req, res) => {
-  const { email, username, title, genre } = req.body.values
+  const { email, username, title, genre, profilepic } = req.body.values
+  console.log(req.body)
   knex('users').where('id', req.params.id)
     .update({
       email: email,
       username: username,
       title: title,
-      genre: genre
+      genre: genre,
+      profilepic: profilepic,
+      logged_in: req.body.logged_in
     })
     .then(() => {
       knex.select()
         .from('users')
         .then((users) => {
-          console.log(users)
+          res.send(users[0])
         })
     })
 })

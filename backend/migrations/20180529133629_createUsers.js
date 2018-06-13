@@ -10,6 +10,7 @@ exports.up = function(knex, Promise) {
     table.string('title').notNullable()
     table.string('genre').notNullable()
     table.string('profilepic')
+    table.boolean('logged_in').notNullable().defaultTo(false)
   })
 };
 

@@ -17,13 +17,17 @@ class Landing extends Component {
       })
       .then((res) => {
         res.data ? this.props.history.push(`/artist/${res.data.user.id}`) : this.props.history.push('/')
+        axios.put(`http://localhost:6060/artists/${res.data.user.id}`, {
+          values: res.data.user,
+          logged_in: true
+        })
       })
       .catch((error) => {
         console.log(error)
       })
-      if (!err) {
-        console.log('Received values of form: ', values)
-      }
+      // if (!err) {
+      //   console.log('Received values of form: ', values)
+      // }
     })
   }
 

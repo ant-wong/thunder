@@ -27,7 +27,7 @@ class App extends Component {
     // console.log(this.state)
     return (
       <div className="App">
-        <Navbar />
+        <Navbar {...this.props}/>
         <Switch>
           <Route exact path="/" render={() => {
             return <Landing {...this.props} />

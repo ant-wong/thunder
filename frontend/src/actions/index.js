@@ -16,9 +16,10 @@ export const getAllUsers = (users) => ({
   users
 })
 
-// export const editUser = () => {
-
-// }
+export const editUser = (user) => ({
+  type: types.EDIT_USER,
+  user
+})
 
 // export const deleteUser = () => {
 
