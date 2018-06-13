@@ -20,8 +20,6 @@ const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(actionCreators, dispatch)
 }
 
-// console.log(store.getState())
-
 const ReduxApp = withRouter(connect(mapStateToProps, mapDispatchToProps)(App))
 
 ReactDOM.render(

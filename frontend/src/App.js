@@ -4,13 +4,14 @@ import axios from 'axios'
 
 import './styles/theme.css'
 import Navbar from './components/Navbar'
+import UserNav from './components/UserNav'
 import Landing from './components/Landing'
 import Profile from './components/Profile'
 import SignUp from './components/SignUp'
 import Explore from './components/Explore'
 import Update from './components/Update'
 import NotFound  from './components/NotFound'
-import Footer from './components/Footer'
+// import Footer from './components/Footer'
 
 class App extends Component {
 
