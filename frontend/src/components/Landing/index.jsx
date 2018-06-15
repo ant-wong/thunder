@@ -21,6 +21,10 @@ class Landing extends Component {
           values: res.data.user,
           logged_in: true
         })
+        .then((res) => {
+          console.log(res)
+          this.props.editUser(res)
+        })
       })
       .catch((error) => {
         console.log(error)

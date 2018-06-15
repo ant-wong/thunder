@@ -94,8 +94,10 @@ router.put('/artists/:id', (req, res) => {
     .then(() => {
       knex.select()
         .from('users')
-        .then((users) => {
-          res.send(users[0])
+        .where('id', req.params.id)
+        .then((user) => {
+          console.log(user)
+          res.send(user[0])
         })
     })
 })

@@ -16,10 +16,11 @@ class Explore extends Component {
   }
 
   render() {
-
+    console.log(this.props)
     const usersJSX =  this.props.users.map((user, i) => {
       return <Col span={6}>
                <Card
+                 key={i}
                  style={{ width: 250 }}
                  cover={<img alt="avatar" src={user.profilepic} />}
                  actions={[<Icon type="setting" />, <Icon type="edit" />, <Icon type="ellipsis" />]} >

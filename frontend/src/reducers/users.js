@@ -8,11 +8,15 @@ const users = (state = [], action) => {
         action.user
       ]
     case types.GET_ALLUSERS:
-      return action.users
+    console.log(action.users)
+      return state
     case types.GET_SINGLEUSER:
       return action.user 
     case types.EDIT_USER:
-      return
+      return [
+        ...state,
+        action.user.data
+      ]
     // case types.DELETE_USER:
     //   // return
     default:
