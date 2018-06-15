@@ -15,14 +15,11 @@ import NotFound  from './components/NotFound'
 class App extends Component {
 
   componentWillMount() {
-    axios.get('http://localhost:6060/artists')
-      .then((res) => {
-        this.props.getAllUsers(res.data)
-      })
+    this.props.getAllUsers()
   }
 
   render() {
-    // console.log(this.props)
+    console.log(this.props)
     // console.log(this.state)
     return (
       <div className="App">

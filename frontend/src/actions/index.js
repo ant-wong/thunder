@@ -1,4 +1,5 @@
 import * as types from '../constants/actionTypes'
+import axios from 'axios'
 
 // USERS
 export const addUser = (user) => ({
@@ -11,7 +12,18 @@ export const getOneUser = (user) => ({
   user
 })
 
-export const getAllUsers = (users) => ({
+// API CALL
+export const getAllUsers = () => {
+  return (dispatch) => {
+    return axios.get('http://localhost:6060/artists')
+      .then((res) => {
+        dispatch(loadUsers(res.data))
+      })
+  }
+}
+
+  /* DONE */
+export const loadUsers = (users) => ({
   type: types.GET_ALLUSERS,
   users
 })

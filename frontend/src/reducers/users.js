@@ -7,9 +7,9 @@ const users = (state = [], action) => {
         ...state,
         action.user
       ]
+    /* DONE */
     case types.GET_ALLUSERS:
-    console.log(action.users)
-      return state
+      return action.users
     case types.GET_SINGLEUSER:
       return action.user 
     case types.EDIT_USER:

@@ -12,13 +12,13 @@ export default class Navbar extends Component {
       logged_in: false
     })
     .then((res) => {
-      console.log(res)
+      // console.log(res)
       this.props.editUser(res)
     })
   }
 
   render() {
-    console.log(this.props.users)
+    // console.log(this.props.users)
     return (
       <nav className="thunderNav">
         {this.props.users.logged_in ? 
