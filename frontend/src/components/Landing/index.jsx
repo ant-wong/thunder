@@ -17,14 +17,14 @@ class Landing extends Component {
       })
       .then((res) => {
         res.data ? this.props.history.push(`/artist/${res.data.user.id}`) : this.props.history.push('/')
-        axios.put(`http://localhost:6060/artists/${res.data.user.id}`, {
-          values: res.data.user,
-          logged_in: true
-        })
-        .then((res) => {
-          console.log(res)
-          this.props.editUser(res)
-        })
+        // axios.put(`http://localhost:6060/artists/${res.data.user.id}`, {
+        //   values: res.data.user,
+        //   logged_in: true
+        // })
+        // .then((res) => {
+        //   this.props.editUser(res)
+        // })
+        this.props.loginUserData(res.data.user)
       })
       .catch((error) => {
         console.log(error)

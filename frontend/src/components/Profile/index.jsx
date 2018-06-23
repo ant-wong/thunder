@@ -1,19 +1,16 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
-import axios from 'axios'
+// import axios from 'axios'
 
 class Profile extends Component {
-  componentDidMount() {
-    axios.get(`http://localhost:6060/artists/${this.props.match.params.id}`)
-      .then((res) => {
-        this.props.getOneUser(res.data[0])
-      })
+  componentWillMount() {
+    this.props.getAllUsers()
   }
 
   render() {
     console.log(this.props)
     return (
-      <div onClick={this.testGet}>
+      <div>
        <h1>{this.props.users.title}</h1>
        <br/>
        <h2>{this.props.users.genre}</h2>

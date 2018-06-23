@@ -13,10 +13,7 @@ const users = (state = [], action) => {
     case types.GET_SINGLEUSER:
       return action.user 
     case types.EDIT_USER:
-      return [
-        ...state,
-        action.user.data
-      ]
+      return action.user
     // case types.DELETE_USER:
     //   // return
     default:

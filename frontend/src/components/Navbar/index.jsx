@@ -18,7 +18,7 @@ export default class Navbar extends Component {
   }
 
   render() {
-    // console.log(this.props.users)
+    console.log(this.props)
     return (
       <nav className="thunderNav">
         {this.props.users.logged_in ? 

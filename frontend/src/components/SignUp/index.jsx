@@ -27,7 +27,7 @@ class SignUp extends Component  {
           console.log(error)
         })
       if (!err) {
-        console.log('Received values of form: ', values)
+        this.props.history.push("/success")
       }
     })
   }

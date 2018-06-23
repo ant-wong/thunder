@@ -8,11 +8,11 @@ const { Meta } = Card
 class Explore extends Component {
 
   componentWillMount() {
-    axios.get('http://localhost:6060/artists')
-      .then((res) => {
-        console.log(res.data)
-        this.props.getAllUsers(res.data)
-      })
+    // axios.get('http://localhost:6060/artists')
+    //   .then((res) => {
+    //     console.log(res.data)
+    //     this.props.getAllUsers(res.data)
+    //   })
   }
 
   render() {
